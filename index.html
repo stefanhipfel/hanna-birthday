@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanna's 7th Birthday - Unicorn Academy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #d4e7fe 0%, #f0d4f7 30%, #fce4ec 60%, #d4f7e7 100%);
+    font-family: 'Quicksand', sans-serif;
+    padding: 20px;
+  }
+
+  .invitation {
+    width: 620px;
+    max-width: 100%;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow:
+      0 20px 60px rgba(130, 80, 200, 0.2),
+      0 0 0 3px rgba(180, 130, 230, 0.25),
+      0 0 40px rgba(220, 120, 200, 0.1);
+    position: relative;
+  }
+
+  /* ===== HERO IMAGE SECTION ===== */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .stars-hero {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .star-h {
+    position: absolute;
+    font-size: 16px;
+    animation: twinkle 2s ease-in-out infinite;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+  }
+
+  .star-h:nth-child(1) { top: 8%; left: 6%; animation-delay: 0s; }
+  .star-h:nth-child(2) { top: 12%; right: 8%; animation-delay: 0.6s; }
+  .star-h:nth-child(3) { top: 5%; left: 40%; animation-delay: 1.2s; font-size: 12px; }
+  .star-h:nth-child(4) { top: 20%; right: 20%; animation-delay: 0.3s; font-size: 12px; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
+  }
+
+  /* ===== TITLE BANNER ===== */
+  .title-section {
+    text-align: center;
+    padding: 25px 30px 15px;
+    position: relative;
+  }
+
+  .academy-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c4dff, #e040fb);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 12px rgba(124, 77, 255, 0.3);
+  }
+
+  .title-section h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 46px;
+    background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+
+  .title-section .subtitle {
+    font-family: 'Pacifico', cursive;
+    font-size: 22px;
+    color: #ce93d8;
+  }
+
+  .age-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #7c4dff, #e040fb);
+    border-radius: 50%;
+    margin: 12px auto 0;
+    box-shadow: 0 6px 20px rgba(124, 77, 255, 0.3);
+    position: relative;
+  }
+
+  .age-badge::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .age-badge span {
+    font-family: 'Pacifico', cursive;
+    font-size: 38px;
+    background: linear-gradient(135deg, #7c4dff, #e040fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== BODY / DETAILS ===== */
+  .body {
+    padding: 25px 40px 40px;
+    text-align: center;
+  }
+
+  .intro {
+    font-size: 16px;
+    color: #7c4dff;
+    font-weight: 600;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #ede7f6, #fce4ec);
+    border-radius: 16px;
+    padding: 16px 22px;
+    text-align: left;
+    border: 1px solid rgba(124, 77, 255, 0.08);
+  }
+
+  .detail-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(124, 77, 255, 0.12);
+  }
+
+  .detail-text { flex: 1; }
+
+  .detail-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #b388ff;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .detail-value {
+    font-size: 17px;
+    color: #4a148c;
+    font-weight: 700;
+  }
+
+  /* ===== RAINBOW DIVIDER ===== */
+  .rainbow-divider {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #7c4dff, #e040fb, #ff6090, #ffab40, #69f0ae, #40c4ff, #7c4dff);
+    background-size: 200% 100%;
+    animation: rainbow-scroll 4s linear infinite;
+    margin: 5px 0 25px;
+    opacity: 0.7;
+  }
+
+  @keyframes rainbow-scroll {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-text {
+    font-size: 14px;
+    color: #7c4dff;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .footer-emoji {
+    font-size: 24px;
+    margin-top: 14px;
+    display: block;
+    letter-spacing: 8px;
+  }
+
+  /* ===== RSVP SECTION ===== */
+  .rsvp-section {
+    padding: 0 40px 40px;
+    text-align: center;
+  }
+
+  .rsvp-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 28px;
+    background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  .rsvp-subtitle {
+    font-size: 13px;
+    color: #b388ff;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #b388ff;
+    font-weight: 700;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border: 2px solid #ede7f6;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fafafe, #fef8ff);
+    color: #4a148c;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #ce93d8;
+    box-shadow: 0 0 0 3px rgba(206, 147, 216, 0.2);
+  }
+
+  .form-group input::placeholder {
+    color: #cdb8e8;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b388ff' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .radio-option {
+    flex: 1;
+    position: relative;
+  }
+
+  .radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .radio-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #ede7f6;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fafafe, #fef8ff);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7c4dff;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .radio-option input[type="radio"]:checked + label {
+    border-color: #e040fb;
+    background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+    box-shadow: 0 0 0 3px rgba(224, 64, 251, 0.15);
+  }
+
+  .radio-option label .radio-emoji {
+    font-size: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 14px;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .submit-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #7c4dff, #e040fb);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 77, 255, 0.4);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Success message */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 30px 20px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .success-message .success-emoji {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .success-message h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 24px;
+    color: #7c4dff;
+    margin-bottom: 8px;
+  }
+
+  .success-message p {
+    font-size: 14px;
+    color: #b388ff;
+    font-weight: 600;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== FALLBACK FOR IMAGE ===== */
+  .hero-fallback {
+    display: none;
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+  }
+
+  .hero img[src]  ~ .hero-fallback { display: none; }
+
+  @media (max-width: 480px) {
+    .hero { height: 200px; }
+    .title-section h1 { font-size: 34px; }
+    .title-section .subtitle { font-size: 18px; }
+    .body { padding: 20px 20px 30px; }
+    .detail-row { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="invitation">
+
+  <!-- Hero image -->
+  <div class="hero">
+    <div class="stars-hero">
+      <span class="star-h">✨</span>
+      <span class="star-h">✨</span>
+      <span class="star-h">⭐</span>
+      <span class="star-h">⭐</span>
+    </div>
+    <img
+      src="https://www.kinderspielmagazin.de/wp-content/uploads/2023/11/Unicorn-Academy-Key-Art-Character.jpg"
+      alt="Unicorn Academy"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="hero-fallback" style="display:none;">🦄</div>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-section">
+    <div class="academy-badge">✨ Unicorn Academy ✨</div>
+    <h1>Hanna wird 7!</h1>
+    <div class="subtitle">Du bist eingeladen</div>
+    <div class="age-badge"><span>7</span></div>
+  </div>
+
+  <!-- Details -->
+  <div class="body">
+    <p class="intro">
+      Komm mit auf ein magisches Abenteuer<br>voller Einhörner, Glitzer und Spaß!
+    </p>
+
+    <div class="details">
+      <div class="detail-row">
+        <div class="detail-icon">📅</div>
+        <div class="detail-text">
+          <div class="detail-label">Wann</div>
+          <div class="detail-value">Samstag, 18. April 2026</div>
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-icon">🕙</div>
+        <div class="detail-text">
+          <div class="detail-label">Uhrzeit</div>
+          <div class="detail-value">10:00 Uhr</div>
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-icon">📍</div>
+        <div class="detail-text">
+          <div class="detail-label">Wo</div>
+          <div class="detail-value">Fern & Funkel California</div>
+          <div style="font-size:13px; color:#7c4dff; font-weight:600; margin-top:2px;">Dörntelsberg 6, 74889 Sinsheim</div>
+          <div style="margin-top:4px;"><a href="https://fern-funkel.de/" target="_blank" style="font-size:12px; color:#e040fb; text-decoration:none; font-weight:600;">fern-funkel.de</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rainbow-divider"></div>
+
+    <p class="footer-text">
+      Wir freuen uns auf dich!<br>
+      Bitte gib bis zum 10. April Bescheid,<br>
+      ob du kommen kannst.
+    </p>
+    <span class="footer-emoji">🌈 🦄 💜</span>
+  </div>
+
+  <!-- RSVP Form -->
+  <div class="rsvp-section">
+    <div class="rainbow-divider" style="margin: 0 0 28px;"></div>
+    <div class="rsvp-title">Zusage / Absage</div>
+    <div class="rsvp-subtitle">Bitte bis zum 10. April antworten</div>
+
+    <form class="rsvp-form" id="rsvpForm" action="https://api.web3forms.com/submit" method="POST">
+      <!-- Replace YOUR_ACCESS_KEY with your Web3Forms key -->
+      <input type="hidden" name="access_key" value="c7a70092-218d-4604-be9a-5b0cc79fa872">
+      <input type="hidden" name="subject" value="RSVP: Hannas 7. Geburtstag - Unicorn Academy">
+      <input type="hidden" name="from_name" value="Unicorn Academy Einladung">
+
+      <div class="form-group">
+        <label>Name des Kindes</label>
+        <input type="text" name="Kindername" placeholder="Wie heisst dein Kind?" required>
+      </div>
+
+      <div class="form-group">
+        <label>Kommst du?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="yes" name="Zusage" value="Ja, wir kommen!" required>
+            <label for="yes"><span class="radio-emoji">🦄</span> Ja, klar!</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="no" name="Zusage" value="Leider nicht">
+            <label for="no"><span class="radio-emoji">😢</span> Leider nein</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="extraFields" style="display:none; flex-direction:column; gap:14px;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Anzahl Eltern dabei</label>
+            <select name="Anzahl Eltern">
+              <option value="0">Kein Elternteil</option>
+              <option value="1" selected>1 Elternteil</option>
+              <option value="2">2 Elternteile</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nachricht (optional)</label>
+          <input type="text" name="Nachricht" placeholder="Allergien, Besonderheiten, etc.">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Absenden ✨</button>
+    </form>
+
+    <div class="success-message" id="successMsg">
+      <span class="success-emoji">🎉🦄✨</span>
+      <h3>Danke!</h3>
+      <p>Deine Antwort wurde gesendet.<br>Wir freuen uns auf die Party!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show/hide extra fields based on yes/no
+  document.querySelectorAll('input[name="Zusage"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var extra = document.getElementById('extraFields');
+      if (this.value === 'Ja, wir kommen!') {
+        extra.style.display = 'flex';
+      } else {
+        extra.style.display = 'none';
+      }
+    });
+  });
+
+  // Handle form submission
+  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = document.getElementById('submitBtn');
+    btn.textContent = 'Wird gesendet...';
+    btn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success) {
+        form.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        btn.textContent = 'Absenden ✨';
+        btn.disabled = false;
+        alert('Es gab ein Problem. Bitte versuche es nochmal.');
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Absenden ✨';
+      btn.disabled = false;
+      alert('Es gab ein Problem. Bitte versuche es nochmal.');
+    });
+  });
+</script>
+
+</body>
+</html>
