@@ -98,14 +98,16 @@
   /* ===== REALISTIC RAINBOW ARC (behind characters in hero) ===== */
   .rainbow-arc {
     position: absolute;
-    top: 0;
-    left: -20%;
-    right: -20%;
+    top: -10%;
+    left: -25%;
+    right: -25%;
     bottom: 0;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: screen;
-    opacity: 0.85;
+    opacity: 0.6;
+    mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 95%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 95%);
   }
 
   .rainbow-arc svg {
@@ -114,15 +116,15 @@
     overflow: visible;
   }
 
-  /* Individual rainbow bands — wide, soft, like a sky rainbow */
+  /* Individual rainbow bands — vivid but not covering characters */
   .rb { fill: none; stroke-linecap: butt; }
-  .rb-red    { stroke: rgba(255, 50, 50, 0.55);  stroke-width: 14; filter: blur(2px); }
-  .rb-orange { stroke: rgba(255, 150, 20, 0.50); stroke-width: 14; filter: blur(2px); }
-  .rb-yellow { stroke: rgba(255, 230, 30, 0.48); stroke-width: 14; filter: blur(1.5px); }
-  .rb-green  { stroke: rgba(50, 210, 90, 0.48);  stroke-width: 14; filter: blur(1.5px); }
-  .rb-blue   { stroke: rgba(50, 140, 255, 0.50); stroke-width: 14; filter: blur(2px); }
-  .rb-indigo { stroke: rgba(105, 60, 230, 0.50); stroke-width: 14; filter: blur(2px); }
-  .rb-violet { stroke: rgba(185, 50, 230, 0.55); stroke-width: 14; filter: blur(2px); }
+  .rb-red    { stroke: rgba(255, 40, 40, 0.8);  stroke-width: 16; filter: blur(2px); }
+  .rb-orange { stroke: rgba(255, 140, 10, 0.75); stroke-width: 16; filter: blur(2px); }
+  .rb-yellow { stroke: rgba(255, 225, 20, 0.70); stroke-width: 16; filter: blur(1.5px); }
+  .rb-green  { stroke: rgba(40, 200, 80, 0.70);  stroke-width: 16; filter: blur(1.5px); }
+  .rb-blue   { stroke: rgba(40, 130, 255, 0.75); stroke-width: 16; filter: blur(2px); }
+  .rb-indigo { stroke: rgba(100, 50, 230, 0.75); stroke-width: 16; filter: blur(2px); }
+  .rb-violet { stroke: rgba(180, 40, 230, 0.8);  stroke-width: 16; filter: blur(2px); }
 
   /* Wide soft glow behind entire rainbow */
   .rb-glow {
@@ -130,7 +132,7 @@
     stroke: url(#rainbowGrad);
     stroke-width: 110;
     stroke-linecap: butt;
-    opacity: 0.15;
+    opacity: 0.2;
     filter: blur(14px);
   }
 
