@@ -36,7 +36,7 @@
   .hero {
     position: relative;
     width: 100%;
-    height: 280px;
+    height: 320px;
     overflow: hidden;
     background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
   }
@@ -47,6 +47,7 @@
     object-fit: cover;
     object-position: center top;
     display: block;
+    position: relative;
   }
 
   .hero-overlay {
@@ -54,9 +55,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
-    background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, transparent 100%);
+    height: 65%;
+    background: linear-gradient(
+      to top,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0.95) 10%,
+      rgba(255,255,255,0.7) 30%,
+      rgba(255,255,255,0.3) 55%,
+      rgba(255,255,255,0) 100%
+    );
     pointer-events: none;
+    z-index: 2;
   }
 
   .stars-hero {
@@ -65,7 +74,7 @@
     height: 100%;
     top: 0; left: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
   }
 
   .star-h {
@@ -84,6 +93,103 @@
   @keyframes twinkle {
     0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
     50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
+  }
+
+  /* ===== REALISTIC RAINBOW ARC (behind characters in hero) ===== */
+  .rainbow-arc {
+    position: absolute;
+    top: 0;
+    left: -20%;
+    right: -20%;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    opacity: 0.85;
+  }
+
+  .rainbow-arc svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Individual rainbow bands — wide, soft, like a sky rainbow */
+  .rb { fill: none; stroke-linecap: butt; }
+  .rb-red    { stroke: rgba(255, 60, 60, 0.28);  stroke-width: 14; filter: blur(3px); }
+  .rb-orange { stroke: rgba(255, 160, 30, 0.26); stroke-width: 14; filter: blur(3px); }
+  .rb-yellow { stroke: rgba(255, 235, 50, 0.24); stroke-width: 14; filter: blur(2.5px); }
+  .rb-green  { stroke: rgba(60, 210, 100, 0.24); stroke-width: 14; filter: blur(2.5px); }
+  .rb-blue   { stroke: rgba(60, 150, 255, 0.26); stroke-width: 14; filter: blur(3px); }
+  .rb-indigo { stroke: rgba(110, 70, 230, 0.26); stroke-width: 14; filter: blur(3px); }
+  .rb-violet { stroke: rgba(190, 60, 230, 0.28); stroke-width: 14; filter: blur(3px); }
+
+  /* Wide soft glow behind entire rainbow */
+  .rb-glow {
+    fill: none;
+    stroke: url(#rainbowGrad);
+    stroke-width: 110;
+    stroke-linecap: butt;
+    opacity: 0.08;
+    filter: blur(18px);
+  }
+
+  /* (glitter stripes removed — sparkle on title instead) */
+
+  /* Sparkle stars scattered along the arc */
+  .sparkle-container {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle-glow 3s ease-in-out infinite;
+    box-shadow: 0 0 8px 3px rgba(255,255,255,0.6);
+  }
+
+  .sparkle::before, .sparkle::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+    border-radius: 1px;
+  }
+
+  .sparkle::before {
+    width: 1.5px; height: 12px;
+    top: -3.5px; left: 1.75px;
+  }
+
+  .sparkle::after {
+    width: 12px; height: 1.5px;
+    top: 1.75px; left: -3.5px;
+  }
+
+  /* Positioned along the arc path in the upper part of the hero */
+  .sparkle:nth-child(1)  { left: 5%;  top: 55%; animation-delay: 0s; }
+  .sparkle:nth-child(2)  { left: 14%; top: 35%; animation-delay: 0.5s; }
+  .sparkle:nth-child(3)  { left: 24%; top: 20%; animation-delay: 1.1s; }
+  .sparkle:nth-child(4)  { left: 36%; top: 10%; animation-delay: 1.6s; }
+  .sparkle:nth-child(5)  { left: 50%; top: 6%;  animation-delay: 0.3s; }
+  .sparkle:nth-child(6)  { left: 64%; top: 10%; animation-delay: 0.8s; }
+  .sparkle:nth-child(7)  { left: 76%; top: 20%; animation-delay: 1.3s; }
+  .sparkle:nth-child(8)  { left: 86%; top: 35%; animation-delay: 1.8s; }
+  .sparkle:nth-child(9)  { left: 95%; top: 55%; animation-delay: 0.6s; }
+  .sparkle:nth-child(10) { left: 30%; top: 15%; animation-delay: 2.2s; width: 3px; height: 3px; }
+  .sparkle:nth-child(11) { left: 55%; top: 7%;  animation-delay: 0.9s; width: 3px; height: 3px; }
+  .sparkle:nth-child(12) { left: 70%; top: 14%; animation-delay: 2.5s; width: 3px; height: 3px; }
+
+  @keyframes sparkle-glow {
+    0%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+    50% { opacity: 0.9; transform: scale(1) rotate(45deg); }
   }
 
   /* ===== TITLE BANNER ===== */
@@ -111,12 +217,36 @@
   .title-section h1 {
     font-family: 'Pacifico', cursive;
     font-size: 46px;
-    background: linear-gradient(135deg, #7c4dff 0%, #e040fb 50%, #ff6090 100%);
+    background:
+      linear-gradient(
+        110deg,
+        #ff4444 0%,
+        #ff8800 10%,
+        #ffdd00 20%,
+        #44dd44 30%,
+        #44bbff 40%,
+        #8844ff 50%,
+        rgba(255,255,255,0.95) 53%,
+        #ff44cc 56%,
+        #8844ff 65%,
+        #44bbff 75%,
+        #44dd44 82%,
+        #ffdd00 88%,
+        #ff8800 94%,
+        #ff4444 100%
+      );
+    background-size: 300% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.2;
     margin-bottom: 5px;
+    animation: title-shimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes title-shimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: -50% 50%; }
   }
 
   .title-section .subtitle {
@@ -480,6 +610,47 @@
       onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
     />
     <div class="hero-fallback" style="display:none;">🦄</div>
+    <!-- Sparkle Rainbow (behind characters in sky) -->
+    <div class="rainbow-arc">
+      <svg viewBox="0 0 700 350" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <linearGradient id="rainbowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff4444"/>
+            <stop offset="17%" stop-color="#ff8800"/>
+            <stop offset="33%" stop-color="#ffdd00"/>
+            <stop offset="50%" stop-color="#44dd44"/>
+            <stop offset="67%" stop-color="#44bbff"/>
+            <stop offset="83%" stop-color="#8844ff"/>
+            <stop offset="100%" stop-color="#ff44cc"/>
+          </linearGradient>
+        </defs>
+        <!-- Wide soft glow behind -->
+        <path class="rb-glow" d="M-50,345 Q350,-80 750,345"/>
+        <!-- 7 color bands — wide arc from edge to edge, high in the sky -->
+        <path class="rb rb-red"    d="M-50,345 Q350,-100 750,345"/>
+        <path class="rb rb-orange" d="M-36,345 Q350,-82 736,345"/>
+        <path class="rb rb-yellow" d="M-22,345 Q350,-64 722,345"/>
+        <path class="rb rb-green"  d="M-8,345  Q350,-46 708,345"/>
+        <path class="rb rb-blue"   d="M6,345   Q350,-28 694,345"/>
+        <path class="rb rb-indigo" d="M20,345  Q350,-10 680,345"/>
+        <path class="rb rb-violet" d="M34,345  Q350,8 666,345"/>
+        <!-- (glitter stripes removed) -->
+      </svg>
+      <div class="sparkle-container">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+      </div>
+    </div>
     <div class="hero-overlay"></div>
   </div>
 
@@ -488,7 +659,6 @@
     <div class="academy-badge">✨ Unicorn Academy ✨</div>
     <h1>Hanna wird 7!</h1>
     <div class="subtitle">Du bist eingeladen</div>
-    <div class="age-badge"><span>7</span></div>
   </div>
 
   <!-- Details -->
